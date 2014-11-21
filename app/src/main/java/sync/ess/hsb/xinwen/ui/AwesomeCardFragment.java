@@ -112,52 +112,8 @@ public class AwesomeCardFragment extends ScrollTabHolderFragment implements
 		// = Utils.PRE_CAT_URL + rss_cat + Utils.POST_CAT_URL;
 		mPosition = getArguments().getInt(ARG_POSITION);
 		position = getArguments().getInt(ARG_POSITION);
-
-		// Utils.CAT_TOP_NEWS, Utils.CAT_WORLD,
-		// Utils.CAT_INDIA, Utils.CAT_CHINA, Utils.CAT_BUSINESS,
-		// Utils.CAT_SPORTS, Utils.CAT_SCI_TECH, Utils.CAT_HEALTH
-//		switch (position) {
-//		case 1:
-//			rss_link = Utils.PRE_CAT_URL + Utils.CAT_TOP_NEWS
-//					+ Utils.POST_CAT_URL;
-//			break;
-////		case 2:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_WORLD + Utils.POST_CAT_URL;
-////			break;
-////		case 3:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_INDIA + Utils.POST_CAT_URL;
-////			break;
-////		case 4:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_CHINA + Utils.POST_CAT_URL;
-////			break;
-////		case 5:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_BUSINESS
-////					+ Utils.POST_CAT_URL;
-////			break;
-////		case 6:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_SPORTS
-////					+ Utils.POST_CAT_URL;
-////			break;
-////		case 7:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_SCI_TECH
-////					+ Utils.POST_CAT_URL;
-////			break;
-////		case 8:
-////			rss_link = Utils.PRE_CAT_URL + Utils.CAT_HEALTH
-////					+ Utils.POST_CAT_URL;
-////			break;
-//		// case 9:
-//		// rss_link = Utils.PRE_CAT_URL + Utils.CAT_TOP_NEWS +
-//		// Utils.POST_CAT_URL;
-//		// break;
-//
-//		default:
-//			break;
-//		}
 		Log.i("Awesome", "On create argument" + position);
-		// for (int i = 1; i <= 100; i++) {
-		// mListItems.add(i + ". Quinion " + (mPosition + 1));
-		// }
+
 	}
 
 	@Override
@@ -182,17 +138,6 @@ public class AwesomeCardFragment extends ScrollTabHolderFragment implements
 		 String rss_cat = bundle.getString("cat");
 		
 		 String rss_link = Utils.PRE_CAT_URL + rss_cat + Utils.POST_CAT_URL;
-		// Log.i("Awesome Card", "rss_link" + rss_link);
-		// String rss_link = "http://news.google.com/?output=rss";
-
-//		switch (position) {
-//		case 1:
-//			rss_link = Utils.PRE_CAT_URL + Utils.CAT_TOP_NEWS
-//					+ Utils.POST_CAT_URL;
-//			break;
-//		default:
-//			break;
-//		}
 		new loadRSSFeedItems().executeOnExecutor(
 				AsyncTask.THREAD_POOL_EXECUTOR, rss_link);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -279,16 +224,13 @@ public class AwesomeCardFragment extends ScrollTabHolderFragment implements
 		protected String doInBackground(String... args) {
 			// rss link url
 			String rss_url = args[0];
-
 			// list of rss items
 			rssItems = rssParser.getRSSFeedItems(rss_url);
 			int newscounter = 0;
 			// looping through each item
 			for (RSSItem item : rssItems) {
-
 				// creating new HashMap
 				HashMap<String, String> map = new HashMap<String, String>();
-
 				// adding each child node to HashMap key => value
 				map.put(TAG_TITLE, item.getTitle());
 				map.put(TAG_LINK, item.getLink());
@@ -352,7 +294,6 @@ public class AwesomeCardFragment extends ScrollTabHolderFragment implements
 				newscounter++;
 
 			}
-
 			// updating UI from Background Thread
 			// getActivity().runOnUiThread(new Runnable() {
 			// public void run() {

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sync.ess.hsb.xinwen" >
+    package="sync.ess.hsb.xinwen">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- Required to check if WiFi is enabled -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name="sync.ess.hsb.xinwen.ui.xinwenApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="sync.ess.hsb.xinwen.ui.MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +25,31 @@
         </activity>
         <activity
             android:name="sync.ess.hsb.xinwen.ui.DisPlayWebPageActivity"
-            android:theme="@style/AppTheme"
-            ></activity>
+            android:theme="@style/AppTheme"></activity>
+
+        <service android:name="sync.ess.hsb.xinwen.Applink.AppLinkService" />
+
+
+        <receiver android:name="sync.ess.hsb.xinwen.Applink.AppLinkReceiver">
+
+
+            <intent-filter>
+
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+
+            </intent-filter>
+
+        </receiver>
+
+
     </application>
 
 </manifest>
